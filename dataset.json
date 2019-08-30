@@ -28,7 +28,12 @@
         {
             "id":5,
             "name":"us5",
-            "friends":[4]
+            "friends":[4, 6]
+        },
+        {
+            "id":6,
+            "name":"us6",
+            "friends":[5]
         }
         
     ]

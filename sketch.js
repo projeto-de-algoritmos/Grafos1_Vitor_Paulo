@@ -42,7 +42,7 @@ function draw(){
     background(51);
     if(started){
         graph.setStart(graph.graph["us0"]);
-        graph.setEnd(graph.graph["us5"]);
+        graph.setEnd(graph.graph["us6"]);
         bfs();
         //console.log(graph);
         graph.show();
@@ -57,6 +57,7 @@ function bfs(){
     var queue = [];
     var start = graph.start;
     var end = graph.end;
+    var path = [];
     queue.push(start);
     start.visited = true;
     while(queue.length > 0){
@@ -68,17 +69,23 @@ function bfs(){
                 if(current.edges[i] == end){
                     console.log("visitandoend: "+current.edges[i].value);
                     end.visited = true;
+                    end.color = color(255, 0, 0);
                     end.parents = current;
                     end.parents.color = color(255, 0, 0);
-                    end.color = color(255, 0, 0);
+                    while(current.parents!=null){
+
+                        current.parents.color = color(255, 0, 0);
+                        current = current.parents;
+                    }
                     return;
                 }
                 queue.push(current.edges[i]);
-                console.log("visitando: " + current.edges[i].value);
+                console.log("visitando: " + current.edges[i].value + " i: "+i);
+                
                 current.edges[i].visited = true;
                 current.edges[i].parents = current;
                 console.log("parent: " + current.edges[i].parents.value);
-                current.edges[i].parents.color = color(255, 0, 0);
+                // current.edges[i].parents.color = color(255, 0, 0);
             }
             //console.log(current.value);
         }
