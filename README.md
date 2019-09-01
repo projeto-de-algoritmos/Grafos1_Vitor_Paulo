@@ -10,6 +10,6 @@ cd Grafos1_Vitor_Paulo/
 
 python3 -m http.server 8000
 ```
-Se por algum acaso, suas alterações não estiverem surtindo efeito, será necessário atualizar o horário da aplicação. Para isso basta abrir o projeto em uma página web, pressionar F12, procurar pela aba "Network", e desabilite a cache:
+Se por algum acaso, suas alterações não estiverem surtindo efeito, será necessário desabilitar a cache do navegador. Para isso basta abrir o projeto em uma página web, pressionar F12, procurar pela aba "Network", e desabilite a cache:
 
 Após isso tudo deve estar rodando normalmente.
