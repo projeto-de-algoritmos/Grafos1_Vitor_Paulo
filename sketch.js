@@ -1,16 +1,51 @@
 var started = false;
 var graph;
 var dataset;
+var sel;
+var setado = false;
+var button, button2;
+
 
 var myPromise = new Promise(function(resolve, reject){
-	// resolve the promise after 1 second
-  setTimeout(resolve, 1000)
+    // resolve the promise after 1 second
+    setTimeout(resolve, 1000)
 });
 
 async function setup(){
     dataset = loadJSON('dataset.json', callback);
     await myPromise;
+    button = createButton('RESET');
+    button.position(300, 50);
+    button.mousePressed(resetar);
+
+    button = createButton('FAZER');
+    button.position(200, 50);
+    button.mousePressed(fazer);
+
     started = true;
+    sel = createSelect();
+    sel2 = createSelect();
+    sel.position(10, 50);
+    sel2.position(100, 50);
+    sel.option("select");
+    sel2.option("select");
+    for (var i = 0; i < graph.nodes.length; i++) {
+        sel.option(graph.nodes[i].value);
+    }
+    for (var i = 0; i < graph.nodes.length; i++) {
+        sel2.option(graph.nodes[i].value);
+    }
+}
+
+function mySelectEvent() {
+    graph.setStart(graph.graph[sel.value()]);
+}
+function mySelectEvent1() {
+    graph.setEnd(graph.graph[sel2.value()]);
+    
+}
+function fazer(){
+    setado=true;
 }
 
 function callback(){
@@ -38,33 +73,44 @@ function readData(data){
 }
 
 function draw(){
-    createCanvas(600, 600);
-    background(51);
     if(started){
-        graph.setStart(graph.graph["us0"]);
-        graph.setEnd(graph.graph["us6"]);
-        bfs();
-        //console.log(graph);
-        graph.show();
-        graph.simulate();
+        textAlign(CENTER);
+        background(200);
+        sel.changed(mySelectEvent);
+        sel2.changed(mySelectEvent1);
+        
+        //AJEITAR COR E TEXTO
+        text('select user', 10, 0);
+
+        createCanvas(600, 600);
+        
+        background(51);
+        if(setado){
+            bfs();
+            graph.show();
+            graph.simulate();
+        }
         
     }
+    
+}
 
+function resetar(){
+    if(setado){
+        setado=false;
+        setup();
+    }
 }
 
 function bfs(){
-    //console.log(graph);
     var queue = [];
     var start = graph.start;
     var end = graph.end;
-    var path = [];
     queue.push(start);
     start.visited = true;
     while(queue.length > 0){
         var current = queue.shift();
-        //console.log(current);
         for(var i=0; i<current.edges.length; i++){
-            //console.log(current.edges[i].visited);
             if(current.edges[i].visited == false){
                 if(current.edges[i] == end){
                     console.log("visitandoend: "+current.edges[i].value);
@@ -85,9 +131,7 @@ function bfs(){
                 current.edges[i].visited = true;
                 current.edges[i].parents = current;
                 console.log("parent: " + current.edges[i].parents.value);
-                // current.edges[i].parents.color = color(255, 0, 0);
             }
-            //console.log(current.value);
         }
     }
 }
