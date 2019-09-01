@@ -14,21 +14,24 @@ var myPromise = new Promise(function(resolve, reject){
 async function setup(){
     dataset = loadJSON('dataset.json', callback);
     await myPromise;
-    button = createButton('RESET');
-    button.position(300, 50);
+    createCanvas(800, 800);
+    button = createButton('RESETAR');
+    button.position(500, 50);
     button.mousePressed(resetar);
 
     button = createButton('FAZER');
-    button.position(200, 50);
+    button.position(400, 50);
     button.mousePressed(fazer);
 
     started = true;
+    fill(10);
+    text('selecionar usuario inicial', 0, 0);
     sel = createSelect();
     sel2 = createSelect();
     sel.position(10, 50);
-    sel2.position(100, 50);
-    sel.option("select");
-    sel2.option("select");
+    sel2.position(200, 50);
+    sel.option("Selecionar usuário inicial");
+    sel2.option("selecionar usuário final");
     for (var i = 0; i < graph.nodes.length; i++) {
         sel.option(graph.nodes[i].value);
     }
@@ -75,16 +78,10 @@ function readData(data){
 function draw(){
     if(started){
         textAlign(CENTER);
-        background(200);
         sel.changed(mySelectEvent);
         sel2.changed(mySelectEvent1);
         
-        //AJEITAR COR E TEXTO
-        text('select user', 10, 0);
-
-        createCanvas(600, 600);
-        
-        background(51);
+        background(200);
         if(setado){
             bfs();
             graph.show();
