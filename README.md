@@ -14,7 +14,7 @@ Se por algum acaso, suas alterações não estiverem surtindo efeito, será nece
 ```
 Date.now()
 ```
-Esse comando vai gerar um número que deve ser copiado e substituido no arquivo index.html nesses respectivos lugares.
+Esse comando vai gerar um número que deve ser copiado e substituido no arquivo index.html nesses respectivos lugares:
 ```
 <script src="sketch.js?t=1567349803648"></script>
 <script src="node.js?t=1567349803648"></script>
