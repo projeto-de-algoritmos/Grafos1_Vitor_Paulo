@@ -15,6 +15,9 @@ async function setup(){
     dataset = loadJSON('dataset.json', callback);
     await myPromise;
     createCanvas(800, 800);
+    fill(10);
+    legenda = createElement('h4', 'O grafo a ser mostrado ilustra o caminho com menos conexões (em vermelho) entre os usuários selecionados.');
+    legenda.position(10, 0);
     button = createButton('RESETAR');
     button.position(500, 50);
     button.mousePressed(resetar);
@@ -24,8 +27,6 @@ async function setup(){
     button.mousePressed(fazer);
 
     started = true;
-    fill(10);
-    text('selecionar usuario inicial', 0, 0);
     sel = createSelect();
     sel2 = createSelect();
     sel.position(10, 50);
