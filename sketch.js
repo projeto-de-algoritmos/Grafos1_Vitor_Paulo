@@ -14,24 +14,32 @@ var myPromise = new Promise(function(resolve, reject){
 async function setup(){
     dataset = loadJSON('dataset.json', callback);
     await myPromise;
-    createCanvas(800, 800);
-    fill(10);
+    createCanvas(windowWidth, windowHeight);
+
+    var xPos = windowWidth;
+
     legenda = createElement('h4', 'O grafo a ser mostrado ilustra o caminho com menos conexões (em vermelho) entre os usuários selecionados.');
-    legenda.position(10, 0);
+    legenda.position(xPos / 6, 0);
     legenda.style('color', '#000000');
+
+    input = createInput();
+    input.position(10, 50);
+    button = createButton('Adicionar Usuário');
+    button.position(input.x + input.width, 50);
+
     button = createButton('RESETAR');
-    button.position(500, 50);
+    button.position(xPos / 2 + 490, 50);
     button.mousePressed(resetar);
 
     button = createButton('FAZER');
-    button.position(400, 50);
+    button.position(xPos / 2 + 390, 50);
     button.mousePressed(fazer);
 
     started = true;
     sel = createSelect();
     sel2 = createSelect();
-    sel.position(10, 50);
-    sel2.position(200, 50);
+    sel.position(xPos / 2, 50);
+    sel2.position(xPos / 2 + 190, 50);
     sel.option("Selecionar usuário inicial");
     sel2.option("selecionar usuário final");
     for (var i = 0; i < graph.nodes.length; i++) {
