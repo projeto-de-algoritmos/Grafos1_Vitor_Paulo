@@ -18,6 +18,7 @@ async function setup(){
     fill(10);
     legenda = createElement('h4', 'O grafo a ser mostrado ilustra o caminho com menos conexões (em vermelho) entre os usuários selecionados.');
     legenda.position(10, 0);
+    legenda.style('color', '#000000');
     button = createButton('RESETAR');
     button.position(500, 50);
     button.mousePressed(resetar);
