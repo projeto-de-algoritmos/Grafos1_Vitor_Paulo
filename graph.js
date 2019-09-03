@@ -4,7 +4,7 @@ class Graph {
         this.graph = {};
         this.start = null;
         this.end = null;
-        this.springLength = 150;
+        this.springLength = 300;
     }
 
     setStart(node) {
@@ -39,7 +39,7 @@ class Graph {
     simulate() {
 
         // First node always in center
-        this.nodes[0].pos.set(width / 2, height / 2);
+        this.nodes[0].pos.set(2*width / 3, height / 2);
 
         // Look at every node against every other node
         for (var i = 1; i < this.nodes.length; i++) {
